@@ -1,0 +1,30 @@
+[
+  {
+    "userId": 1,
+    "nomeTitular": "Matheus G. de Sousa",
+    "numeroFinal": "1234",
+    "limiteTotal": 5000,
+    "gastosFatura": 0
+  },
+  {
+    "userId": 2,
+    "nomeTitular": "Ana Silva",
+    "numeroFinal": "5678",
+    "limiteTotal": 3000,
+    "gastosFatura": 250
+  },
+  {
+    "userId": 3,
+    "nomeTitular": "Carlos Souza",
+    "numeroFinal": "9012",
+    "limiteTotal": 8000,
+    "gastosFatura": 3200.5
+  },
+  {
+    "userId": 4,
+    "nomeTitular": "Matheus Grigorio de Sousa",
+    "numeroFinal": "3456",
+    "limiteTotal": 1500,
+    "gastosFatura": 120
+  }
+]

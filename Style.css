@@ -1,0 +1,860 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Estilos Globais e Variáveis (Tema Vermelho e Preto) */
+:root {
+  --cor-primaria: #D90429; /* Vermelho forte */
+  --cor-primaria-hover: #EF233C; /* Vermelho mais claro para hover */
+  --cor-fundo: #1A1A1A; /* Preto/Cinza muito escuro */
+  --cor-secundaria: #2C2C2C; /* Cinza escuro para cards */
+  --cor-texto: #FFFFFF; /* Branco */
+  --cor-texto-claro: #ADB5BD; /* Cinza claro para textos secundários */
+  --cor-entrada: #2ECC71; /* Verde para ganhos */
+  --cor-saida: #FF4D6D; /* Vermelho/Rosa para gastos */
+  --cor-branco: #ffffff;
+  --sombra-card: none; /* Design mais flat, sem sombras */
+  --border-radius: 12px;
+  --cor-borda: #495057;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+/* Estrutura e Container */
+.container, .app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Cabeçalho */
+.dashboard-header, .app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.dashboard-header h1, .app-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--cor-texto);
+}
+
+.logout-button {
+  background: var(--cor-secundaria);
+  color: var(--cor-texto-claro);
+  border: 1px solid var(--cor-borda);
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.logout-button:hover {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  border-color: var(--cor-primaria);
+}
+
+/* Estilo dos Cards */
+.card {
+  background-color: var(--cor-secundaria);
+  border-radius: var(--border-radius);
+  box-shadow: var(--sombra-card);
+  border: 1px solid var(--cor-borda);
+  padding: 24px;
+  margin-bottom: 25px;
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--cor-texto-claro);
+  font-weight: 500;
+}
+
+/* Card de Saldo */
+.saldo-card {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+  border: none;
+}
+
+.saldo-card h2 {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.saldo-valor {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Card de Ações Rápidas */
+.acoes-card {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.acoes-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  overflow-x: auto; /* Permite scroll horizontal em telas pequenas */
+  padding-bottom: 10px;
+}
+
+.acao-button {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 95px;
+  height: 95px;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--cor-texto);
+  background-color: var(--cor-secundaria);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.acao-button:hover {
+  background-color: #3a3a3a;
+  transform: translateY(-2px);
+}
+
+/* Card de Transações */
+.transacoes-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.transacao-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.transacao-item:last-child {
+  border-bottom: none;
+}
+
+.transacao-icon {
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.transacao-info {
+  flex-grow: 1;
+}
+
+.transacao-descricao {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--cor-texto);
+}
+
+.transacao-data {
+  font-size: 0.85rem;
+  color: var(--cor-texto-claro);
+}
+
+.transacao-valor {
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: right;
+}
+
+.transacao-valor.entrada {
+  color: var(--cor-entrada);
+}
+
+.transacao-valor.saida {
+  color: var(--cor-saida);
+}
+
+/* Página de Serviços e Formulários */
+.servicos-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+.servicos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: var(--cor-secundaria);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--cor-borda);
+  margin-bottom: 25px;
+}
+
+.servicos-form h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.servicos-form input {
+  padding: 14px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.servicos-form input:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 2px rgba(217, 4, 41, 0.3);
+}
+
+.servicos-form button {
+  padding: 14px;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.servicos-form button:hover {
+  background-color: var(--cor-primaria-hover);
+}
+
+/* Mensagem de Erro/Status */
+.error-message {
+    background-color: rgba(255, 77, 109, 0.1);
+    color: var(--cor-saida);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid var(--cor-saida);
+}
+
+.success-message {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--cor-entrada);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid var(--cor-entrada);
+    margin-top: 20px;
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 600px) {
+  .container, .app-container {
+    padding: 16px;
+  }
+
+  .dashboard-header h1, .app-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .saldo-valor {
+    font-size: 2.2rem;
+  }
+}
+
+/* Layout Principal com Navegação */
+.layout {
+  display: flex;
+  flex-direction: row; /* Altera para linha para posicionar a sidebar ao lado do conteúdo */
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  /* Padding inferior para não sobrepor a nav em telas pequenas */
+  padding-bottom: 100px;
+  margin-left: 200px; /* Adiciona margem para não ficar embaixo da sidebar */
+}
+
+/* Navegação Inferior (Padrão para Mobile) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--cor-secundaria);
+  border-top: 1px solid var(--cor-borda);
+  padding: 10px 0;
+  z-index: 1000;
+  display: none; /* Esconde por padrão (visível apenas em mobile) */
+}
+
+/* Barra de Navegação Lateral (Padrão para Desktop) */
+.sidebar-nav {
+  width: 200px;
+  background-color: var(--cor-secundaria);
+  border-right: 1px solid var(--cor-borda);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1001;
+}
+
+.sidebar-nav .nav-brand {
+  display: block; /* Garante que o nome seja exibido */
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--cor-primaria);
+  text-align: center;
+  padding: 0 20px 20px 20px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.sidebar-nav .nav-links-container {
+  display: flex;
+  flex-direction: column; /* Garante que os links fiquem um embaixo do outro */
+  margin-top: 20px;
+}
+
+.sidebar-nav .nav-link {
+  padding: 15px 25px;
+  flex-direction: row; /* Faz o ícone e o texto ficarem lado a lado */
+  align-items: center;
+  gap: 15px; /* Espaçamento entre ícone e texto */
+  font-size: 1rem; /* Aumenta o tamanho da fonte na sidebar */
+}
+
+.nav-links-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.nav-brand {
+  display: none; /* Escondido em telas de celular */
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--cor-texto-claro);
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding: 0 10px;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--cor-texto);
+}
+
+.nav-link.active {
+  color: var(--cor-primaria);
+}
+
+/* Ajustes para telas menores (Mobile) */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column; /* Volta para coluna em mobile */
+  }
+  .sidebar-nav {
+    display: none; /* Esconde a sidebar em mobile */
+  }
+  .main-content {
+    margin-left: 0; /* Remove a margem da sidebar */
+  }
+  .bottom-nav {
+    display: flex; /* Mostra a navegação inferior em mobile */
+  }
+}
+
+/* Estilos Adicionais para o Chatbot */
+.chatbot-messages .message p {
+  margin: 0; /* Remove a margem padrão dos parágrafos do ReactMarkdown */
+}
+
+.suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.suggestion-chips button {
+  background-color: var(--cor-secundaria);
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto-claro);
+  padding: 8px 12px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.suggestion-chips button:hover {
+  background-color: #3a3a3a;
+  color: var(--cor-texto);
+  border-color: var(--cor-texto-claro);
+}
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 15px !important;
+}
+
+.typing-indicator span {
+  height: 8px;
+  width: 8px;
+  background-color: var(--cor-texto-claro);
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 2px;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-of-type(2) {
+  animation-delay: -1.0s;
+}
+
+.typing-indicator span:nth-of-type(3) {
+  animation-delay: -0.8s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1.0); }
+}
+
+/* --- NOVOS ESTILOS DO CHATBOT --- */
+
+/* Fundo escurecido */
+.chatbot-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.chatbot-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Botão flutuante */
+.chatbot-fab {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+  border-radius: 50%;
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 1001;
+}
+.chatbot-fab:hover {
+  background-color: var(--cor-primaria-hover);
+  transform: scale(1.1);
+}
+.chatbot-fab.hidden {
+  transform: scale(0);
+  opacity: 0;
+}
+
+/* Modal do Chat (estilo "folha deslizante") */
+.chatbot-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90vh; /* Ocupa 90% da altura da tela */
+  background-color: var(--cor-secundaria);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  /* Começa fora da tela */
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  visibility: hidden;
+  z-index: 1000;
+}
+
+.chatbot-modal.show {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.chatbot-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  padding-top: 25px; /* Espaço para o "puxador" */
+}
+
+/* Botão de fechar do Chatbot */
+.chatbot-header button {
+  /* Empurra o botão para a extrema direita */
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--cor-texto-claro);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.chatbot-header button:hover {
+  background-color: var(--cor-borda);
+  color: var(--cor-texto);
+}
+
+/* "Puxador" no topo do modal */
+.chatbot-handle {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 5px;
+  background-color: var(--cor-borda);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.chatbot-input {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: var(--cor-fundo);
+  border-top: 1px solid var(--cor-borda);
+  border-radius: 24px; /* Cantos arredondados para o contêiner */
+  margin: 10px;
+  transition: box-shadow 0.2s;
+}
+
+.chatbot-input:focus-within {
+  box-shadow: 0 0 0 2px var(--cor-primaria);
+}
+
+.chatbot-input input {
+  flex-grow: 1;
+  background-color: transparent;
+  color: var(--cor-texto);
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.chatbot-input button {
+  background: none;
+  border: none;
+  color: var(--cor-primaria);
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.2s;
+}
+
+.chatbot-input button:disabled {
+  color: var(--cor-borda);
+  cursor: not-allowed;
+}
+
+/* Estilos para Desktop */
+@media (min-width: 768px) {
+  .chatbot-fab { bottom: 40px; right: 40px; }
+
+  .chatbot-modal {
+    /* Volta a ser um pop-up no canto */
+    height: auto;
+    max-height: 70vh;
+    width: 380px;
+    bottom: 120px;
+    left: auto;
+    right: 40px;
+    border-radius: 16px; /* Cantos arredondados em todas as direções */
+    transform: translateY(20px) scale(0.95); /* Animação de "zoom" */
+    opacity: 0;
+  }
+
+  .chatbot-modal.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .chatbot-handle {
+    display: none; /* Esconde o puxador no desktop */
+  }
+}
+
+/* --- ESTILOS DA PÁGINA PIX (CAIXAS DE SERVIÇO) --- */
+
+.lista-servicos-pix {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaçamento entre as caixas */
+  margin-top: 20px;
+}
+
+.servico-item-pix {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--cor-fundo); /* Cor de fundo um pouco diferente do card */
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  color: var(--cor-texto);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.servico-item-pix:hover {
+  background-color: #252525; /* Escurece um pouco no hover */
+  transform: translateY(-2px);
+}
+
+.servico-icone {
+  margin-right: 20px;
+  color: var(--cor-primaria);
+}
+
+.servico-info h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.servico-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--cor-texto-claro);
+}
+
+/* --- ESTILOS DA PÁGINA DE COMPROVANTE --- */
+
+.comprovante-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.comprovante-header {
+  margin-bottom: 30px;
+}
+
+.comprovante-header h1 {
+  font-size: 1.8rem;
+  margin: 10px 0;
+}
+
+.comprovante-header p {
+  color: var(--cor-texto-claro);
+  font-size: 1.1rem;
+}
+
+.comprovante-body {
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--cor-secundaria);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.comprovante-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: left;
+}
+
+.comprovante-item:last-child {
+  border-bottom: none;
+}
+
+.comprovante-item span {
+  color: var(--cor-texto-claro);
+}
+
+.comprovante-item strong {
+  color: var(--cor-texto);
+  word-break: break-all;
+}
+
+/* --- ESTILOS DA PÁGINA DE CARTÃO --- */
+
+.cartao-container {
+  padding-top: 24px;
+}
+
+.cartao-virtual {
+  width: 100%;
+  max-width: 400px;
+  height: 220px;
+  margin: 0 auto 30px auto;
+  border-radius: 16px;
+  background: linear-gradient(45deg, #333, #111);
+  color: var(--cor-branco);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.cartao-chip {
+  width: 50px;
+  height: 40px;
+  background-color: #c0c0c0;
+  border-radius: 6px;
+}
+
+.cartao-info {
+  text-align: left;
+}
+
+.cartao-numero {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.cartao-nome {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.fatura-info {
+  padding: 10px 20px;
+}
+
+.fatura-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+.fatura-item:last-child { border-bottom: none; }
+
+.fatura-valor {
+  font-size: 1.5rem;
+  color: var(--cor-primaria);
+}
+
+.acoes-cartao {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.acoes-cartao .button.secondary {
+  background-color: var(--cor-secundaria);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+}
+
+/* --- ESTILOS DA PÁGINA DE LOGIN --- */
+
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 40px; /* Adiciona um espaço entre o formulário e o rodapé */
+}
+
+.login-footer {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  color: var(--cor-texto-claro);
+}
+
+.login-footer p {
+  margin: 0 0 15px 0;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cor-texto-claro);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--cor-primaria);
+}

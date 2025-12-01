@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nome": "Matheus",
+    "cpf": "123.456.789-00",
+    "senha": "password123"
+  },
+  {
+    "id": 2,
+    "nome": "Ana Silva",
+    "cpf": "987.654.321-00",
+    "senha": "ana_password"
+  },
+  {
+    "id": 3,
+    "nome": "Carlos Souza",
+    "cpf": "111.222.333-44",
+    "senha": "carlos123"
+  },
+  {
+    "id": 4,
+    "nome": "Matheus grigorio de sousa",
+    "cpf": "49591786808",
+    "senha": "147580"
+  }
+]

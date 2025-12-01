@@ -1,0 +1,202 @@
+[
+  {
+    "id": 0,
+    "descricao": "Depósito Salarial",
+    "categoria": "deposito",
+    "valor": 2210.5,
+    "data": "2025-11-01",
+    "userId": 1
+  },
+  {
+    "id": 1,
+    "descricao": "Recarga de celular",
+    "categoria": "recarga",
+    "valor": -15,
+    "data": "2025-11-01",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "descricao": "PIX enviado",
+    "categoria": "pix_envio",
+    "valor": -50,
+    "data": "2025-11-01",
+    "userId": 1
+  },
+  {
+    "id": 3,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -80,
+    "data": "2025-11-01",
+    "userId": 1
+  },
+  {
+    "id": 4,
+    "descricao": "PIX enviado",
+    "categoria": "pix_envio",
+    "valor": -20,
+    "data": "2025-11-02",
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -120.5,
+    "data": "2025-11-02",
+    "userId": 1
+  },
+  {
+    "id": 6,
+    "descricao": "Recarga de celular",
+    "categoria": "recarga",
+    "valor": -30,
+    "data": "2025-11-03",
+    "userId": 1
+  },
+  {
+    "id": 7,
+    "descricao": "PIX recebido",
+    "categoria": "pix_recebido",
+    "valor": 150,
+    "data": "2025-11-03",
+    "userId": 1
+  },
+  {
+    "id": 8,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -45,
+    "data": "2025-11-03",
+    "userId": 1
+  },
+  {
+    "id": 10,
+    "descricao": "PIX enviado para 111.222.333-44",
+    "categoria": "pix_envio",
+    "valor": -50,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 11,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -80,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 12,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 13,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 14,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 15,
+    "descricao": "Recarga de celular para 11967247588",
+    "categoria": "recarga",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 16,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 17,
+    "descricao": "Recarga de celular para 11967247588",
+    "categoria": "recarga",
+    "valor": -20,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 18,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -20,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 19,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 20,
+    "descricao": "Recarga de celular para 11967247588",
+    "categoria": "recarga",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 21,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 22,
+    "descricao": "Pagamento da fatura do cartão",
+    "categoria": "pagamento_fatura",
+    "valor": -750.8,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 23,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 24,
+    "descricao": "Recarga de celular para (11)967247588",
+    "categoria": "recarga",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 1
+  },
+  {
+    "id": 25,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-11-30",
+    "userId": 4
+  }
+]
