@@ -60,6 +60,8 @@ export default function Chatbot() {
           'NAVIGATE_TO_PAGAMENTO': '/pagamento',
           'NAVIGATE_TO_RECARGA': '/recarga',
           'NAVIGATE_TO_SERVICES': '/servicos',
+          'ANALYZE_SPENDING': '/extrato',
+          'NAVIGATE_TO_CARTAO': '/cartao',
         };
 
         if (navigationActions[action]) {

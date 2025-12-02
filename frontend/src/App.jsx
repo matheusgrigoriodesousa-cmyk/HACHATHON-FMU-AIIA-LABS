@@ -7,13 +7,13 @@
  * - Separar rotas públicas (Login, Cadastro) de rotas protegidas (o resto da aplicação).
  */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import '../../Style.css';
+import '../style.css';
 import { AuthProvider } from './AuthContext';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Layout from './pages/Layout';
 import Dashboard from './pages/Dashboard';
 import Servicos from './pages/Servicos';
-import Extrato from './pages/Extrato';
+import ExtratoPage from './pages/ExtratoPage';
 import LoginPage from './pages/LoginPage';
 import CadastroPage from './pages/CadastroPage';
 import ComprovantePage from './pages/ComprovantePage';
@@ -42,7 +42,7 @@ function App() {
               <Route index element={<Dashboard />} />
               {/* Demais rotas filhas que serão renderizadas dentro do Layout */}
               <Route path="servicos" element={<Servicos />} />
-              <Route path="extrato" element={<Extrato />} />
+              <Route path="extrato" element={<ExtratoPage />} />
               <Route path="pix" element={<PixPage />} />
               <Route path="recarga" element={<RecargaPage />} />
               <Route path="pagamento" element={<PagamentoPage />} />

@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 
+// Importa as rotas de chaves PIX
+const chavesPixRoutes = require("./routes/chavesPixRoutes");
+
 // Função para ler arquivos JSON de forma síncrona e atualizada
 const readJsonFileSync = (filepath) => {
   const data = fs.readFileSync(filepath, 'utf-8');
@@ -154,6 +157,24 @@ app.post("/cartao/pagar-fatura", (req, res) => {
   });
 });
 
+/**
+ * Função auxiliar para categorizar uma transação de forma mais inteligente.
+ * @param {object} transacao - O objeto da transação.
+ * @returns {string} - A categoria da transação.
+ */
+const categorizarTransacao = (transacao) => {
+  const descricao = transacao.descricao.toLowerCase();
+  if (descricao.includes('uber') || descricao.includes('99') || descricao.includes('transporte')) return 'Transporte';
+  if (descricao.includes('ifood') || descricao.includes('restaurante') || descricao.includes('comida') || descricao.includes('mercado')) return 'Alimentação';
+  if (descricao.includes('recarga')) return 'Recarga e Serviços';
+  if (descricao.includes('pagamento de boleto')) return 'Pagamento de Contas';
+  if (descricao.includes('pagamento da fatura')) return 'Fatura do Cartão';
+  if (descricao.includes('pix enviado')) return 'Transferências PIX';
+  if (transacao.valor > 0) return 'Entradas'; // Categoriza qualquer valor positivo como Entrada
+
+  return 'Outros'; // Categoria padrão para gastos não identificados
+};
+
 // ===============================
 // ROTA: Análise de Gastos por Categoria
 // ===============================
@@ -163,24 +184,19 @@ app.get("/gastos/categorias", (req, res) => {
     return res.status(400).json({ erro: "userId é obrigatório." });
   }
 
-  // Filtra apenas as transações de saída (gastos)
   const transacoes = readJsonFileSync(TRANS_PATH);
-  const gastosDoUsuario = transacoes.filter(t => t.userId === userId && t.valor < 0);
+  const transacoesDoUsuario = transacoes.filter(t => t.userId === userId);
 
-  if (gastosDoUsuario.length === 0) {
+  if (transacoesDoUsuario.length === 0) {
     return res.json({});
   }
 
-  // Agrupa os gastos por descrição
-  const gastosAgrupados = gastosDoUsuario.reduce((acc, gasto) => {
-    let categoria = gasto.categoria;
-
-    // Agrupa todas as transações de PIX, recarga e pagamento em categorias genéricas
-    if (categoria === 'pix_envio') categoria = 'PIX';
-    if (categoria === 'recarga') categoria = 'Recarga';
-    if (categoria === 'pagamento') categoria = 'Pagamentos';
-
-    acc[categoria] = (acc[categoria] || 0) + gasto.valor;
+  // Agrupa as transações usando a nova função de categorização
+  const gastosAgrupados = transacoesDoUsuario.reduce((acc, transacao) => {
+    // Ignora depósitos de boas-vindas da análise de gastos
+    if (transacao.descricao.includes('Depósito de boas-vindas')) return acc;
+    const categoria = categorizarTransacao(transacao);
+    acc[categoria] = (acc[categoria] || 0) + transacao.valor;
     return acc;
   }, {});
 
@@ -279,11 +295,12 @@ app.post("/chat", async (req, res) => {
   const systemPrompt = `
     Você é a Ruby, uma assistente virtual do banco Telecon Hub.
     Sua tarefa é identificar a intenção do usuário e responder em um formato JSON.
-    As ações possíveis são: "NAVIGATE_TO_PIX", "NAVIGATE_TO_PAGAMENTO", "NAVIGATE_TO_RECARGA", "NAVIGATE_TO_SERVICES", "SHOW_BALANCE", "ANALYZE_SPENDING", "GENERAL_CONVERSATION".
+    As ações possíveis são: "NAVIGATE_TO_PIX", "NAVIGATE_TO_PAGAMENTO", "NAVIGATE_TO_RECARGA", "NAVIGATE_TO_SERVICES", "NAVIGATE_TO_CARTAO", "SHOW_BALANCE", "ANALYZE_SPENDING", "GENERAL_CONVERSATION".
 
     - Se o usuário mencionar "pix", use a ação "NAVIGATE_TO_PIX".
     - Se o usuário mencionar "pagar conta" ou "boleto", use a ação "NAVIGATE_TO_PAGAMENTO".
     - Se o usuário mencionar "recarga" ou "celular", use a ação "NAVIGATE_TO_RECARGA".
+    - Se o usuário mencionar "cartão" ou "cartões", use a ação "NAVIGATE_TO_CARTAO".
     - Se o usuário mencionar "serviços" ou "transação" de forma genérica, use a ação "NAVIGATE_TO_SERVICES".
     - Se o usuário perguntar sobre o saldo, use a ação "SHOW_BALANCE".
     - Se o usuário perguntar sobre seus gastos ou despesas, use a ação "ANALYZE_SPENDING".
@@ -302,6 +319,21 @@ app.post("/chat", async (req, res) => {
       res.json({
         reply: "Entendido. Te levando para a área de pagamento de contas.",
         action: "NAVIGATE_TO_PAGAMENTO"
+      });
+    } else if (message.toLowerCase().includes('gastos') || message.toLowerCase().includes('despesas')) {
+      res.json({
+        reply: "Certo! Vou te mostrar uma análise dos seus gastos.",
+        action: "ANALYZE_SPENDING"
+      });
+    } else if (message.toLowerCase().includes('recarga') || message.toLowerCase().includes('celular')) {
+      res.json({
+        reply: "Ok, vamos fazer uma recarga. Abrindo a página para você.",
+        action: "NAVIGATE_TO_RECARGA"
+      });
+    } else if (message.toLowerCase().includes('cartão') || message.toLowerCase().includes('cartões')) {
+      res.json({
+        reply: "Claro! Vou te levar para a sua área de cartões.",
+        action: "NAVIGATE_TO_CARTAO"
       });
     } else {
       res.json({
@@ -494,6 +526,12 @@ app.post("/servicos/pagamento", (req, res) => {
     transacao: novaTransacao
   });
 });
+
+// ===============================
+// ROTA: Cadastro de Chaves PIX
+// ===============================
+app.use("/chaves-pix", chavesPixRoutes);
+
 
 // ===============================
 // Servidor rodando

@@ -25,6 +25,13 @@
     "nomeTitular": "Matheus Grigorio de Sousa",
     "numeroFinal": "3456",
     "limiteTotal": 1500,
-    "gastosFatura": 120
+    "gastosFatura": 0
+  },
+  {
+    "userId": 5,
+    "nomeTitular": "josé andrade",
+    "numeroFinal": "7974",
+    "limiteTotal": 1000,
+    "gastosFatura": 0
   }
 ]

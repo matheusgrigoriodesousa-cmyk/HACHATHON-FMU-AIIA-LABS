@@ -3,6 +3,7 @@ import axios from "axios"; // Importa a biblioteca 'axios' para fazer requisiç�
 import { useNavigate } from "react-router-dom"; // Importa o hook 'useNavigate' do React Router para navegar entre páginas.
 import { QRCodeSVG } from "qrcode.react"; // Importa o componente 'QRCodeSVG' para renderizar QR Codes em formato SVG.
 import { useAuth } from "../AuthContext"; // Importa o hook 'useAuth' do contexto de autenticação para obter dados do usuário logado.
+import { Html5QrcodeScanner } from "html5-qrcode"; // Importa a biblioteca para leitura de QR Code.
 import { FaArrowCircleUp, FaArrowCircleDown, FaKey } from 'react-icons/fa'; // Importa ícones da biblioteca 'react-icons/fa' para usar na interface.
 
 const API_URL = "http://localhost:4000"; // Define a URL base da API do backend para centralizar as chamadas.
@@ -30,14 +31,65 @@ export default function PixPage() { // Define e exporta o componente funcional '
   // Estados para o formulário de cadastro de nova chave.
   const [tipoNovaChave, setTipoNovaChave] = useState(''); // Estado para o tipo de chave selecionada no formulário de cadastro ('cpf', 'email', etc.).
   const [valorNovaChave, setValorNovaChave] = useState(''); // Estado para o valor da nova chave que está sendo digitada pelo usuário.
+  const [isScannerOpen, setIsScannerOpen] = useState(false); // Estado para controlar a visibilidade do leitor de QR Code.
 
   // Efeito que executa quando o componente é montado ou quando o 'user' muda.
   useEffect(() => { // Hook de efeito para executar código em resposta a mudanças.
     if (user) { // Verifica se o objeto 'user' existe (se o usuário está logado).
-      // Define a chave CPF do usuário como a chave inicial na lista de 'minhasChaves'.
-      setMinhasChaves([{ tipo: 'CPF', valor: user.cpf }]); // Atualiza o estado 'minhasChaves' com um valor inicial.
-    } // Fecha o bloco 'if'.
-  }, [user]); // O array de dependências faz com que este efeito rode apenas quando 'user' for atualizado.
+      // Função para buscar as chaves PIX do usuário no backend
+      const fetchChaves = async () => {
+        try {
+          // Futuramente, o ideal é ter um endpoint GET /chaves-pix?userId=...
+          // Por enquanto, vamos simular com a chave CPF padrão.
+          // Esta lógica pode ser expandida quando o endpoint de listagem for criado.
+          const chavesIniciais = [{ tipo: 'CPF', valor: user.cpf, padrao: true }];
+          // const res = await axios.get(`${API_URL}/chaves-pix?userId=${user.id}`);
+          // setMinhasChaves(res.data);
+          setMinhasChaves(chavesIniciais);
+        } catch (error) {
+          console.error("Erro ao buscar chaves PIX:", error);
+          mostrarMensagemTemporaria("Não foi possível carregar suas chaves.", "erro");
+        }
+      };
+      fetchChaves();
+    }
+  }, [user]);
+
+  // Efeito para controlar o scanner de QR Code.
+  useEffect(() => {
+    if (isScannerOpen) {
+      // Cria uma nova instância do scanner.
+      const scanner = new Html5QrcodeScanner(
+        'qr-reader', // ID do elemento div onde o scanner será renderizado.
+        { fps: 10, qrbox: 250 }, // Configurações: 10 frames por segundo e uma caixa de escaneamento de 250x250 pixels.
+        false // 'verbose' set to false.
+      );
+
+      // Função chamada quando um QR Code é lido com sucesso.
+      const onScanSuccess = (decodedText) => {
+        // O 'decodedText' é o conteúdo do QR Code (PIX Copia e Cola).
+        setChave(decodedText); // Preenche o campo de chave PIX com o conteúdo lido.
+        setIsScannerOpen(false); // Fecha o scanner.
+        setSecaoAtiva('enviar'); // Garante que a seção de envio esteja visível.
+        mostrarMensagemTemporaria("QR Code lido com sucesso!", "sucesso");
+        scanner.clear(); // Limpa e para o scanner.
+      };
+
+      // Função para lidar com erros (opcional).
+      const onScanError = (error) => {
+        // Você pode adicionar um log ou tratamento de erro aqui, se desejar.
+        // console.warn(`QR Code scan error = ${error}`);
+      };
+
+      // Inicia o scanner.
+      scanner.render(onScanSuccess, onScanError);
+
+      // Função de limpeza: será chamada quando o componente for desmontado ou o scanner for fechado.
+      return () => {
+        scanner.clear();
+      };
+    }
+  }, [isScannerOpen]); // Este efeito depende do estado 'isScannerOpen'.
   /**
    * Exibe uma mensagem de status (sucesso ou erro) por 3 segundos.
    */
@@ -101,11 +153,18 @@ export default function PixPage() { // Define e exporta o componente funcional '
    * Formata o valor da chave (CPF ou Telefone) enquanto o usuário digita.
    */
   const handleChaveChange = (e, tipo) => { // Define a função que formata a chave, recebendo o evento e o tipo de chave.
+    // Se for e-mail, apenas atualiza o estado sem formatar.
+    if (tipo === 'email') {
+      setValorNovaChave(e.target.value);
+      return;
+    }
+
     const input = e.target; // Armazena o elemento do input para manipulação.
     let value = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos do valor digitado.
     let formattedValue = value; // Inicializa o valor formatado com o valor limpo.
 
     if (tipo === 'cpf') { // Se o tipo da chave for 'cpf'.
+
       formattedValue = value // Aplica a máscara de CPF.
         .substring(0, 11) // Limita o valor a 11 dígitos.
         .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto.
@@ -187,11 +246,47 @@ export default function PixPage() { // Define e exporta o componente funcional '
     mostrarMensagemTemporaria(`${tipo} copiada com sucesso!`, 'sucesso'); // Exibe uma mensagem de sucesso para o usuário.
   }; // Fecha a função 'copiarParaClipboard'.
 
-  // Função placeholder para cadastrar chave
-  const cadastrarChave = (e) => { // Define a função para lidar com o cadastro de chaves.
-    e.preventDefault(); // Impede o comportamento padrão de recarregamento da página do formulário.
-    mostrarMensagemTemporaria('Funcionalidade de cadastro de chaves em desenvolvimento.', 'info'); // Exibe uma mensagem informativa.
-  } // Fecha a função 'cadastrarChave'.
+  /**
+   * Lida com o cadastro de uma nova chave PIX.
+   */
+  const cadastrarChave = async (e) => {
+    e.preventDefault();
+    if (!tipoNovaChave) {
+      mostrarMensagemTemporaria("Selecione um tipo de chave.", "erro");
+      return;
+    }
+    setIsLoading(true);
+
+    try {
+      let chaveParaCadastrar = valorNovaChave;
+
+      // Se for chave aleatória, gera uma primeiro
+      if (tipoNovaChave === 'aleatoria') {
+        const res = await axios.post(`${API_URL}/pix/gerar-chave-aleatoria`);
+        if (res.data.sucesso) {
+          chaveParaCadastrar = res.data.chave;
+        } else {
+          throw new Error("Falha ao gerar chave aleatória.");
+        }
+      }
+
+      const resCadastro = await axios.post(`${API_URL}/chaves-pix`, {
+        userId: user.id,
+        tipo: tipoNovaChave,
+        chave: chaveParaCadastrar,
+      });
+
+      mostrarMensagemTemporaria(resCadastro.data.message, 'sucesso');
+      setMinhasChaves([...minhasChaves, resCadastro.data.chave]); // Adiciona a nova chave à lista
+      setValorNovaChave(''); // Limpa o formulário
+      setTipoNovaChave('');
+    } catch (err) {
+      const erroMsg = err.response?.data?.message || "Ocorreu um erro ao cadastrar a chave.";
+      mostrarMensagemTemporaria(erroMsg, 'erro');
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return ( // Inicia o retorno do JSX que será renderizado pelo componente.
     <div className="container servicos-container"> {/* Contêiner principal da página de serviços. */}
       <h2>Transferência PIX</h2> {/* Título principal da página. */}
@@ -227,9 +322,12 @@ export default function PixPage() { // Define e exporta o componente funcional '
             <button type="submit" disabled={isLoading || !chave || !valorPix}> {/* Botão para submeter o formulário. */}
               {isLoading ? 'Enviando...' : 'Enviar PIX'} {/* Texto do botão muda se estiver carregando. */}
             </button> {/* Fecha o botão de envio. */}
-            <button type="button" className="button secondary" style={{ marginTop: '10px' }} onClick={() => mostrarMensagemTemporaria('Funcionalidade de leitura de QR Code em desenvolvimento.', 'info')}> {/* Botão para pagar com QR Code. */}
-              Pagar com QR Code {/* Texto do botão. */}
+            <button type="button" className="button secondary" style={{ marginTop: '10px' }} onClick={() => setIsScannerOpen(!isScannerOpen)}>
+              {isScannerOpen ? 'Fechar Leitor' : 'Pagar com QR Code'}
             </button> {/* Fecha o botão de QR Code. */}
+            {isScannerOpen && (
+              <div id="qr-reader" style={{ width: '100%', marginTop: '20px' }}></div>
+            )}
           </form> // Fecha o formulário.
         )} {/* Fecha a renderização condicional. */}
       </div> {/* Fecha a seção 'enviar'. */}
@@ -328,7 +426,7 @@ export default function PixPage() { // Define e exporta o componente funcional '
                   />
                 )} {/* Fecha a renderização condicional. */}
 
-                <button type="submit"> {/* Botão para submeter o cadastro. */}
+                <button type="submit" disabled={isLoading}> {/* Botão para submeter o cadastro. */}
                   {tipoNovaChave === 'aleatoria' ? 'Gerar e Cadastrar Chave Aleatória' : 'Cadastrar Chave'} {/* Texto do botão muda conforme o tipo de chave. */}
                 </button> {/* Fecha o botão. */}
               </form>

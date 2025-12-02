@@ -198,5 +198,109 @@
     "valor": -10,
     "data": "2025-11-30",
     "userId": 4
+  },
+  {
+    "id": 26,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 27,
+    "descricao": "PIX enviado para 49591786808",
+    "categoria": "pix_envio",
+    "valor": -100,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 28,
+    "descricao": "Recarga de celular para 11946201172",
+    "categoria": "recarga",
+    "valor": -10,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 29,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -20,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 30,
+    "descricao": "PIX enviado para 11967247588",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 31,
+    "descricao": "PIX enviado para 49591786808",
+    "categoria": "pix_envio",
+    "valor": -20,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 32,
+    "descricao": "Recarga de celular para 119646201172",
+    "categoria": "recarga",
+    "valor": -20,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 33,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -20,
+    "data": "2025-12-01",
+    "userId": 1
+  },
+  {
+    "id": 34,
+    "descricao": "Depósito de boas-vindas",
+    "categoria": "deposito",
+    "valor": 500,
+    "data": "2025-12-01",
+    "userId": 5
+  },
+  {
+    "id": 35,
+    "descricao": "PIX enviado para 49591786808",
+    "categoria": "pix_envio",
+    "valor": -10,
+    "data": "2025-12-02",
+    "userId": 4
+  },
+  {
+    "id": 36,
+    "descricao": "Recarga de celular para 11967247588",
+    "categoria": "recarga",
+    "valor": -20,
+    "data": "2025-12-02",
+    "userId": 4
+  },
+  {
+    "id": 37,
+    "descricao": "Crédito em conta",
+    "categoria": "deposito",
+    "valor": 1000,
+    "data": "2025-12-02",
+    "userId": 4
+  },
+  {
+    "id": 38,
+    "descricao": "Pagamento da fatura do cartão",
+    "categoria": "pagamento_fatura",
+    "valor": -120,
+    "data": "2025-12-02",
+    "userId": 4
   }
 ]

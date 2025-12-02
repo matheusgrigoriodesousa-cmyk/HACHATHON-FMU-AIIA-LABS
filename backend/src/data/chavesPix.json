@@ -1,0 +1,26 @@
+[
+  {
+    "id": "bed5caae-3d0c-4045-9636-ef54b9275adb",
+    "userId": 4,
+    "tipo": "telefone",
+    "chave": "(11) 96724-7588"
+  },
+  {
+    "id": "5a8eb988-dbf7-4a4f-a262-325837c72c2c",
+    "userId": 4,
+    "tipo": "cpf",
+    "chave": "495.917.868-08"
+  },
+  {
+    "id": "15adeb5c-f53e-4321-89c0-d0b980d22cfe",
+    "userId": 4,
+    "tipo": "aleatoria",
+    "chave": "d99b5823-7f7f-4aa8-9582-757e9d577de5"
+  },
+  {
+    "id": "ddc9fb9d-acce-451c-99ee-efa36439552a",
+    "userId": 4,
+    "tipo": "email",
+    "chave": "matheustesta@gmail.com"
+  }
+]
