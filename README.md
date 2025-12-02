@@ -1,4 +1,4 @@
-# Hub Financeiro Móvel – Projeto Hackathon FMU + aiiaLabs
+# # 🏦 Telecon Hub - Aplicação de Banco DigitalProjeto Hackathon FMU + aiiaLabs
 
 ![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
@@ -9,80 +9,72 @@
 Projeto desenvolvido para o hackathon, consistindo em um hub financeiro móvel que integra controle de gastos, extrato inteligente e transações PIX, com uma arquitetura moderna de frontend e backend desacoplados.
 
 ---
+## 📄 Descrição do Projeto
 
-## 📄 Visão Geral
+O **Telecon Hub** é uma aplicação full-stack de banco digital desenvolvida para o **HACKATHON-FMU-AIIA-LABS**. O projeto simula uma experiência bancária completa, apresentando um frontend moderno construído com React e um backend robusto com Node.js e Express.
 
-Este repositório contém a versão estruturada do projeto **Hub Financeiro Móvel**. A aplicação foi projetada para oferecer uma plataforma simples e intuitiva para gerenciamento financeiro, com foco em operações PIX.
-
-A arquitetura é dividida em duas partes principais:
--   **`frontend/`**: A interface web com a qual o usuário interage, construída com **React** e **Vite** para uma experiência rápida e moderna.
--   **`backend/`**: O servidor responsável pela lógica de negócios, construído com **Node.js** e **Express**. Ele processa as transações, gerencia os dados e expõe uma API para o frontend consumir.
+A aplicação conta com a **Ruby**, uma assistente virtual com IA (simulada), projetada para auxiliar os usuários a navegar pelas funcionalidades e executar ações através de comandos de texto, tornando a experiência mais ágil e interativa.
 
 ## ✨ Funcionalidades Principais
 
-A plataforma oferece um conjunto de funcionalidades focadas em transações PIX, organizadas de forma intuitiva:
+-   **Autenticação de Usuário:** Sistema seguro de Login e Cadastro. Novos usuários recebem um saldo inicial e um cartão de crédito padrão.
+-   **Dashboard Financeiro:** Visão geral do saldo em conta e atalhos para as principais funcionalidades.
+-   **Módulo PIX Completo:**
+    -   Envio de PIX para qualquer tipo de chave.
+    -   Geração de QR Code para recebimento (com ou sem valor definido).
+    -   Leitor de QR Code para pagamentos utilizando a câmera do dispositivo.
+    -   Cadastro e gerenciamento de chaves PIX (CPF, E-mail, Telefone e Aleatória).
+-   **Serviços e Pagamentos:**
+    -   Pagamento de boletos.
+    -   Recarga de celular.
+-   **Gestão de Cartão de Crédito:**
+    -   Visualização de limite total e disponível.
+    -   Acesso à fatura detalhada.
+    -   Funcionalidade para pagar a fatura com o saldo da conta.
+-   **Análise de Gastos e Extrato:**
+    -   Extrato detalhado com todas as transações (entradas e saídas).
+    -   Categorização inteligente de despesas (ex: Alimentação, Transporte, Contas) para uma análise financeira clara.
+-   **🤖 Assistente Virtual (Ruby):**
+    -   Chatbot integrado que interpreta a intenção do usuário.
+    -   Executa ações como navegar para a área PIX, cartões, análise de gastos e outros serviços.
 
--   **Envio de PIX**: Permite enviar dinheiro utilizando uma chave PIX (CPF, E-mail, Telefone).
--   **Pagamento com QR Code**: Funcionalidade para iniciar um pagamento escaneando um QR Code.
--   **Recebimento com QR Code**: Gera um QR Code estático ou com valor definido para receber pagamentos.
--   **Recebimento com Chave Aleatória**: Gera uma chave aleatória para compartilhamento rápido.
--   **Gerenciamento de Chaves PIX**:
-    -   Visualização das chaves cadastradas.
-    -   Cadastro de novas chaves (CPF, E-mail, Telefone ou Aleatória).
-    -   Formulário inteligente com máscara de formatação para CPF e Telefone.
+## 🛠️ Tecnologias Utilizadas
 
-## 🧰 Tecnologias Utilizadas
+### Frontend
+-   **React:** Biblioteca para construção da interface de usuário.
+-   **Vite:** Ferramenta de build e servidor de desenvolvimento rápido.
+-   **React Router:** Para gerenciamento de rotas na SPA (Single Page Application).
+-   **Axios:** Cliente HTTP para comunicação com o backend.
+-   **html5-qrcode:** Biblioteca para implementação do leitor de QR Code.
+-   **react-icons:** Para ícones consistentes e modernos na interface.
 
-| Categoria | Tecnologia | Descrição |
-| :--- | :--- | :--- |
-| **Frontend** | React, Vite | Para uma interface de usuário reativa e um ambiente de desenvolvimento otimizado. |
-| **Backend** | Node.js, Express | Para a construção de uma API RESTful robusta e escalável. |
-| **Comunicação** | Axios, CORS | Para realizar requisições HTTP seguras entre o frontend e o backend. |
-| **Estilização** | CSS puro, React Icons | Para um design limpo e ícones intuitivos. |
-| **Persistência** | Arquivos JSON | Utilizado como um "banco de dados mock" para simular a persistência de dados. |
-| **Desenvolvimento**| Nodemon | Para reiniciar automaticamente o servidor backend durante o desenvolvimento. |
+### Backend
+-   **Node.js:** Ambiente de execução para o JavaScript no servidor.
+-   **Express.js:** Framework para criação da API REST.
+-   **CORS:** Middleware para permitir requisições de origens diferentes.
+-   **File System (fs):** Utilizado para simular um banco de dados com arquivos `.json`.
 
+## 🚀 Como Executar o Projeto
 
+Siga os passos abaixo para rodar a aplicação localmente.
 
-Projeto do hackathon: um hub financeiro móvel que integra controle de gastos, extrato inteligente, transações (entradas e saídas), e interface web leve — com frontend e backend separados.
+### Pré-requisitos
+-   Node.js (versão 16 ou superior)
+-   npm (geralmente instalado com o Node.js)
 
-## 📄 Visão geral
+### 1. Backend
 
-Este repositório contém a versão estruturada do projeto “Hub Financeiro Móvel”:
+Primeiro, inicie o servidor do backend.
 
-- **frontend/** — interface web: HTML, CSS, JS, responsivo para desktop e celular.  
-- **backend/** — servidor Node.js + banco de dados (ou mock JSON), lógica das transações e APIs.  
-
-O objetivo é oferecer uma plataforma simples para cadastrar transações (gastos / entradas), visualizar saldo, histórico, categorias automáticas e previsões financeiras.
-
-## 🚀 Funcionalidades
-
-- Dashboard com saldo atual e lista de transações.  
-
-## 🧰 Tecnologias usadas
-
-- Frontend: HTML, CSS, JavaScript (vanilla).  
-- Backend: Node.js + Express (ou JSON “fake” para dados).  
-- Persistência: JSON ou banco de dados (dependendo da configuração).  
-- Controle de versão e colaboração: Git + GitHub.
-
-## 🔧 Como rodar o projeto localmente
-
-### 1. Clone o repositório  
-git clone https://github.com/matanganelli/hackathon-teleconhub.git
-cd hackathon-teleconhub
-
-1. Instalar Dependências
-Primeiro, navegue até a pasta do backend e instale os módulos necessários:
-
+```bash
+# 1. Navegue até a pasta do backend
 cd backend
+
+# 2. Instale as dependências
 npm install
 
-2. Iniciar o Servidor
-Após a instalação, inicie o servidor em modo de desenvolvimento (dev):
-
+# 3. Inicie o servidor de desenvolvimento
 npm run dev
 
-Se tudo ocorrer bem, o terminal deverá exibir a confirmação e o servidor estará pronto para se comunicar com o frontend:
+# O servidor estará rodando em http://localhost:4000
 
-🚀 Servidor backend rodando em http://localhost:4000
